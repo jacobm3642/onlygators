@@ -1,6 +1,11 @@
 * {
     margin:0;
     padding:0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1F2544;
 }
 
 main {
@@ -12,10 +17,11 @@ nav {
     grid-column: 1;
     width:100%;
     height: auto;
-    border-right: 0.01rem solid gray;
+    border-right: 0.01rem solid #040D12;
     position: sticky;
     top: 0;
     height: 100vh;
+    background-color: #161A30;
 }
 
 nav ul {
@@ -31,17 +37,17 @@ nav a {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
     font-weight: bold;
-    color: gray;
+    color: #93B1A6;
     text-decoration: none;
 }
 
 nav i {
-    margin-right: 1rem;;
+    margin-right: 1rem;
 }
 
 #newPost {
-    border: 1rem solid #00AFF0;
-    background-color: #00AFF0;
+    border: 1rem solid #DA0C81;
+    background-color: #DA0C81;
     border-radius: 3rem;
     width: 90%;
     text-align: center;
@@ -52,3 +58,88 @@ nav i {
     font-weight: bold;
 }
 
+main div img {
+    width: 40%;
+    height: 100%;
+}
+
+main div .image {
+    padding: 0.5rem;
+    margin: 0.5rem auto 0.5rem auto;
+    display: flex;
+    width: 70%;
+    border: 0.15rem solid #040D12;
+    border-radius: 0.5rem;
+    background-color: #161A30;
+}
+
+main div p {
+    margin: 0 0.5rem 0 0.5rem;
+    font-size: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: darkgray;
+}
+
+.username{
+    font-weight: bold;
+}
+
+.image div {
+    display: block;
+}
+
+.comments {
+    max-height: 40rem;
+    overflow: auto;
+    width: 100%;
+}
+
+.comment {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+}
+
+.description {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 0.15rem solid white;
+}
+
+/* For Webkit browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+    background-color: #333; /* Set the background color of the scrollbar */
+}
+  
+::-webkit-scrollbar-track {
+    background-color: #555; /* Set the background color of the scrollbar track */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* Set the color of the scrollbar thumb */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa; /* Set the color of the thumb on hover */
+}
+
+/* For Firefox */
+scrollbar-color: #888 #333;
+scrollbar-width: thin;
+border-radius: 10px;
+
+.inputBox input {
+    margin: 1rem;
+    width: 400rem;
+    height: 100rem;
+}
+
+.inputBox {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
