@@ -5,7 +5,7 @@
 
 main {
     display: grid;
-    grid-template-columns: 2fr 4fr 3fr;
+    grid-template-columns: 2fr 7fr;
 }
 
 nav {
@@ -43,15 +43,12 @@ nav i {
     border: 1rem solid #00AFF0;
     background-color: #00AFF0;
     border-radius: 3rem;
-    color: black;
     width: 90%;
+    text-align: center;
 }
 
 #newPost a {
     color: white;
-    font-weight: normal;
+    font-weight: bold;
 }
 
-#newPost span {
-    text-align: center;
-}
