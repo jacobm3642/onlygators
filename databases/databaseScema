@@ -1,4 +1,4 @@
-create table users( Id INTEGER PRIMARY KEY AUTOINCREMENT,
+create table users( User_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     UserName varchar(255) NOT NULL UNIQUE,
                     Password varchar(255) NOT NULL,
                     Email varchar(255) NOT NULL UNIQUE);
