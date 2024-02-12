@@ -15,6 +15,10 @@ app = flask.Flask(__name__, static_url_path='/static')
 def index():
     return flask.render_template("index.html")
 
+@app.route("/test", methods=['POST'])
+def test():
+    data = flask.request.get_json()
+    return flask.jsonify(data)
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000)
