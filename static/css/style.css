@@ -184,3 +184,15 @@ main div.form-box {
     cursor: pointer;
     width: 100%;
 }
+
+nav h1 {
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+    border: 0.15rem solid #0e1721;
+    border-radius: 0.5rem;
+    width: 20rem;
+    margin: 1rem auto;
+    background-color: #000060;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
