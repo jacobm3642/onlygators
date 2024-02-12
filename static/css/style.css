@@ -112,7 +112,7 @@ main div p {
     border-radius: 10px;
     background-color: #333; /* Set the background color of the scrollbar */
 }
-  
+
 ::-webkit-scrollbar-track {
     background-color: #555; /* Set the background color of the scrollbar track */
     border-radius: 10px;
@@ -142,4 +142,45 @@ border-radius: 10px;
     display: block;
     width: 100%;
     text-align: center;
+}
+
+main div.form-box {
+    width: 30%;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #161A30;
+    border: 0.15rem solid #040D12;
+    border-radius: 0.5rem;
+    color: #93B1A6;
+}
+
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-box .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 0.8rem;
+    box-sizing: border-box;
+}
+
+.form-box .btn-action {
+    background-color: #DA0C81;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    width: 100%;
 }
