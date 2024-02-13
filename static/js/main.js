@@ -20,3 +20,15 @@ function post(route, jsonData, successCallback, errorCallback) {
         }
     });
 }
+
+function add_token(token) {
+    localStorage.setItem('token', token);
+}
+
+function req_token() {
+    return localStorage.getItem('token');
+}
+
+function del_token() {
+    localStorage.removeItem('token');
+}
