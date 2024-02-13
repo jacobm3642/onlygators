@@ -1,21 +1,25 @@
+/* Resetting default margin, padding, and box-sizing for all elements */
 * {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+/* Styling the body with a background color */
 body {
     background-color: #1F2544;
 }
 
+/* Styling for the main grid layout */
 main {
     display: grid;
     grid-template-columns: 2fr 7fr;
 }
 
+/* Styling for the navigation sidebar */
 nav {
     grid-column: 1;
-    width:100%;
+    width: 100%;
     height: auto;
     border-right: 0.01rem solid #040D12;
     position: sticky;
@@ -24,6 +28,7 @@ nav {
     background-color: #161A30;
 }
 
+/* Styling for the navigation list */
 nav ul {
     list-style: none;
     margin: 2rem;
@@ -33,6 +38,7 @@ nav li {
     margin-bottom: 1rem;
 }
 
+/* Styling for navigation links */
 nav a {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
@@ -45,6 +51,7 @@ nav i {
     margin-right: 1rem;
 }
 
+/* Styling for the new post section */
 #newPost {
     border: 1rem solid #DA0C81;
     background-color: #DA0C81;
@@ -58,6 +65,7 @@ nav i {
     font-weight: bold;
 }
 
+/* Styling for images within the main content */
 main div img {
     width: 40%;
     height: 100%;
@@ -80,14 +88,17 @@ main div p {
     color: darkgray;
 }
 
-.username{
+/* Styling for usernames */
+.username {
     font-weight: bold;
 }
 
+/* Styling for image div */
 .image div {
     display: block;
 }
 
+/* Styling for the comments section */
 .comments {
     max-height: 40rem;
     overflow: auto;
@@ -100,38 +111,40 @@ main div p {
     padding: 0.5rem;
 }
 
+/* Styling for post descriptions */
 .description {
     font-size: 2rem;
     margin-bottom: 1rem;
     border-bottom: 0.15rem solid white;
 }
 
-/* For Webkit browsers (Chrome, Safari, etc.) */
+/* Styling for custom scrollbars - Webkit browsers */
 ::-webkit-scrollbar {
     width: 12px;
     border-radius: 10px;
-    background-color: #333; /* Set the background color of the scrollbar */
+    background-color: #333;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #555; /* Set the background color of the scrollbar track */
+    background-color: #555;
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Set the color of the scrollbar thumb */
+    background-color: #888;
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #aaa; /* Set the color of the thumb on hover */
+    background-color: #aaa;
 }
 
-/* For Firefox */
+/* Styling for custom scrollbars - Firefox */
 scrollbar-color: #888 #333;
 scrollbar-width: thin;
 border-radius: 10px;
 
+/* Styling for input boxes */
 .inputBox input {
     margin: 1rem;
     width: 400rem;
@@ -144,6 +157,7 @@ border-radius: 10px;
     text-align: center;
 }
 
+/* Styling for form boxes */
 main div.form-box {
     width: 30%;
     margin: 2rem auto;
@@ -185,14 +199,16 @@ main div.form-box {
     width: 100%;
 }
 
+/* Styling for the navigation header */
 nav h1 {
     font-size: 3rem;
     color: white;
     text-align: center;
     border: 0.15rem solid #0e1721;
     border-radius: 0.5rem;
-    width: 20rem;
+    width: 22rem;
     margin: 1rem auto;
-    background-color: #000060;
+    background-color: #2c3e50;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 0.5rem 0;
 }
