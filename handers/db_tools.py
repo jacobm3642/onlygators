@@ -1,18 +1,63 @@
 import sqlite3
 
 class db_handler:
+    """
+    A class to handle multiple databases and queries.
+
+    Attributes:
+    - databases (dict): A dictionary to store database instances.
+    """
+
     def __init__(self):
+        """
+        Initialize the db_handler object with an empty dictionary of databases.
+        """
         self.databases = {}
 
     def add_query(self, db_name, query_name, query, read_only=False):
+        """
+        Add a pre-made query to a specific database.
+
+        Parameters:
+        - db_name (str): The name of the database.
+        - query_name (str): The name to identify the query.
+        - query (str): The SQL query string.
+        - read_only (bool): Whether the query is read-only (default is False).
+        """
         if db_name in self.databases:
             self.databases[db_name].add_query(query_name, Query(query, read_only))
 
     def execute_premade_query(self, db_name, query_name, permission_level, parameters=None):
+        """
+        Execute a pre-made query from a specific database.
+
+        Parameters:
+        - db_name (str): The name of the database.
+        - query_name (str): The name of the pre-made query.
+        - permission_level (int): The permission level required to execute the query.
+        - parameters (tuple or None): Parameters to substitute into the query (optional).
+
+        Returns:
+        - Result of the query, or False if the database is not found.
+        """
         if db_name in self.databases:
-            return self.databases[db_name].execute_premade_query_low_level(query_name, permission_level, parameters)
+            try:
+                return self.databases[db_name].execute_premade_query_low_level(query_name, permission_level, parameters)
+            except Exception as e:
+                print(f"Error executing pre-made query '{query_name}' in database '{db_name}': {e}")
+                return False
+        else:
+            print(f"Error: Database '{db_name}' not found.")
+            return False
 
     def add_db(self, db_name, db_file):
+        """
+        Add a new database.
+
+        Parameters:
+        - db_name (str): The name of the database.
+        - db_file (str): The file path of the database.
+        """
         new_db = DataBase(db_name, db_file)
         self.databases[db_name] = new_db
 
@@ -25,7 +70,7 @@ class DataBase:
     def __init__(self, db_name, db_file):
         self.name = db_name
         self.path = db_file
-        self.permisson_level_read = 99        
+        self.permisson_level_read = 99
         self.permisson_level_write = 99
         self.permisson_level_bespoke = 99
         self.open_connections = []
@@ -121,19 +166,16 @@ class DataBase:
         - list of tuples: Result of the query.
         """
         if query_name not in self.premade_queries:
-            print(f"Error: Query '{query_name}' not found.")
-            return None
+            raise ValueError(f"Error: Query '{query_name}' not found.")
 
         query = self.premade_queries[query_name]
         if query.read_only:
             if permission_level < self.permisson_level_read:
-                print("permission denid")
-                return
+                raise PermissionError("Permission denied for read operation.")
         else:
             if permission_level < self.permisson_level_write:
-                print("permission denid")
-                return
-    
+                raise PermissionError("Permission denied for write operation.")
+
         query = query.query
 
         connection = self._open_connection()
@@ -145,6 +187,6 @@ class DataBase:
                     result = connection.execute(query).fetchall()
             return result
         except sqlite3.Error as e:
-            print(f"Error executing query '{query_name}': {e}")
+            raise RuntimeError(f"Error executing query '{query_name}': {e}")
         finally:
             self._close_connection(connection)
