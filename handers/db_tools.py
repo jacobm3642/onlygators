@@ -185,7 +185,7 @@ class DataBase:
                     result = connection.execute(query, parameters).fetchall()
                 else:
                     result = connection.execute(query).fetchall()
-            return result
+            return result if result else True
         except sqlite3.Error as e:
             raise RuntimeError(f"Error executing query '{query_name}': {e}")
         finally:

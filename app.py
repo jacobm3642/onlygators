@@ -1,5 +1,6 @@
 import flask
 import sqlite3
+import hashlib
 from handers import db_tools
 from secrets import token_urlsafe
 from flask_cors import CORS
@@ -13,6 +14,12 @@ CORS(app)
 
 CORS(app, resources={r"/register": {"origins": "http://localhost:5000"}})
 
+def hash_b(data):
+    salt = "silly96"
+    data_with_salt = data + salt
+    hashed = hashlib.sha256(data_with_salt.encode()).hexdigest()
+    return hashed
+
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
@@ -25,8 +32,8 @@ def index():
     return flask.render_template("index.html")
 
 @app.route("/getRegister", methods=['POST'])
-def getLogin():
-    return flask.render_template("Register.html")
+def getRegister():
+    return flask.render_template("register.html")
 
 @app.route("/getLogin", methods=['POST'])
 def getLogin():
@@ -36,6 +43,7 @@ def getLogin():
 def login():
     try:
         data = [data_stringify(i) for i in flask.request.get_json()]
+        print(hash_b(data[1]))
         print(data)
     except:
         pass
@@ -51,20 +59,24 @@ def pull_html():
         else:
             raise ValueError("unauthorized")
     except:
-        return flask.jsonify(["unauthorized"]), 500
+        return flask.jsonify(["unauthorized"]), 401
 
 @app.route("/register", methods=['POST'])
 def register():
     try:
         data = [data_stringify(i) for i in flask.request.get_json()]
-        username, password, email = data
-        db_handler.execute_premade_query("Users", "register_user", permission_level=2, parameters=(username, password, email))
+        email, username, password = data
+        password = hash_b(password)
+        if not db_handler.execute_premade_query("Users", "register_user", permission_level=2, parameters=(username, password, email)):
+            return flask.jsonify(["user already exsits"]), 400
         out_db()
-        id = db_handler.execute_premade_query("Users", "get_user_id", 0, parameters=(username))
+        print(username)
+        id = db_handler.execute_premade_query("Users", "get_user_id", 0, parameters=(username,))
+
         token = insert_token(id[0][0])
         return flask.jsonify([token]), 200
     except:
-        return  flask.jsonify(["fuck"]), 500
+        return  flask.jsonify(["Panic"]), 500
 
 
 @app.route("/test", methods=['POST'])
@@ -86,6 +98,7 @@ def clear():
 
 def insert_token(userId):
     token = token_urlsafe(32)
+    print(token)
     try:
         if db_handler.execute_premade_query("Users", "add_token", 2, parameters=(userId, token)) != False:
             return token
@@ -117,7 +130,6 @@ def reset_db():
     db_handler.execute_premade_query("Users","drop_table_token", 99)
     db_handler.execute_premade_query("Users","create_user_table", 99)
     db_handler.execute_premade_query("Users","create_token_table", 99)
-
 
 if __name__ == "__main__":
     init_db_handler()

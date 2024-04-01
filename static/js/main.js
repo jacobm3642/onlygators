@@ -25,10 +25,14 @@ function add_html(html) {
     $('#working').html(html);
 }
 
-function get_creds() {
-    username = $("#username").val();
-    password = $("#password").val();
-    return [username, password]
+function get_creds(email=0) {
+    out = []
+    if (email == 1) {
+        out.push($("#email").val());
+    }
+    out.push($("#username").val());
+    out.push($("#password").val());
+    return out
 }
 
 function write_login(html) {
@@ -38,8 +42,19 @@ function write_login(html) {
     })
 }
 
-function login() {
+function getLogin() {
     post("./getLogin", [], write_login);
+}
+
+function write_register(html) {
+    add_html(html);
+    $("#registerBtn").bind("click", function () {
+        post("./register", get_creds(1), add_token)
+    })
+}
+
+function getRegister() {
+    post("./getRegister", [], write_register)
 }
 
 function get_html(route, content=[]) {
@@ -48,6 +63,8 @@ function get_html(route, content=[]) {
 
 function add_token(token) {
     localStorage.setItem('token', token);
+    add_html("");
+    
 }
 
 function req_token() {
