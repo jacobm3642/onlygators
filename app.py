@@ -24,9 +24,34 @@ def after_request(response):
 def index():
     return flask.render_template("index.html")
 
+@app.route("/getRegister", methods=['POST'])
+def getLogin():
+    return flask.render_template("Register.html")
+
+@app.route("/getLogin", methods=['POST'])
+def getLogin():
+    return flask.render_template("login.html")
+
 @app.route("/login", methods=['POST'])
 def login():
-    pass
+    try:
+        data = [data_stringify(i) for i in flask.request.get_json()]
+        print(data)
+    except:
+        pass
+    return flask.jsonify([]), 200
+
+@app.route("/arb", methods=["POST"])
+def pull_html():
+    try:
+        data = [data_stringify(i) for i in flask.request.get_json()]
+        code, html = data
+        if code == "jacob12345":
+            return flask.render_template(f"./{html}.html")
+        else:
+            raise ValueError("unauthorized")
+    except:
+        return flask.jsonify(["unauthorized"]), 500
 
 @app.route("/register", methods=['POST'])
 def register():
